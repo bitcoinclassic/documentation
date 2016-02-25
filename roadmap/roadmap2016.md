@@ -20,8 +20,6 @@ Note: 0.11.2 is already finished and available for download [here](https://bitco
 ### Phase 2 (Q2-Q3)
 ##### Eliminate the need for blocks to be sent within seconds
 
-Note: We intend to discuss various solutions such as the ones listed below and pick the best ones.
-
 * Reduce the effect of block propagation times on orphan rates (lost miner income)
 * De-emphasize block size as an obstacle for scaling and open up potential for on-chain transaction throughput gains using several improvements (listed below).
 * Optimizations for bandwidth constrained nodes via improvements to the P2P layer
