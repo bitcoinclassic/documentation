@@ -37,7 +37,7 @@ Note: We intend to discuss various solutions such as the ones listed below and p
 
 Note: This phase will only happen when miners & companies confirm Phase 2 successfully addressed their blocksize concerns.
 
-* Use a variation of Steven Pair’s/BitPay [proposal](https://medium.com/@spair/a-simple-adaptive-block-size-limit-748f7cbcfb75#.2r47u4jfc). Validation cost of a block must be less than a small multiple of the average cost over the last difficulty adjustment period
+* Use a variation of Stephen Pair’s/BitPay [proposal](https://medium.com/@spair/a-simple-adaptive-block-size-limit-748f7cbcfb75#.2r47u4jfc). Validation cost of a block must be less than a small multiple of the average cost over the last difficulty adjustment period
 * Simplified version of Segregated Witness from Core, when it is available
 
 
