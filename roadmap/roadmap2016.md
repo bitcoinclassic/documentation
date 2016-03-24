@@ -15,7 +15,7 @@ This will enable the Bitcoin network to scale to significant new levels, without
 * Hard fork with 75% activation threshold (750 of 1000 blocks), 28 day activation grace period.
 * Software based on Bitcoin Core implementation 0.11.2 and 0.12.0.
 
-Note: 0.11.2 is already finished and available for download [here](https://bitcoinclassic.com/).
+Note: 0.11.2 and 0.12 are already finished and available for download [here](https://bitcoinclassic.com/).
 
 ### Phase 2 (Q2-Q3)
 ##### Eliminate the need for blocks to be sent within seconds
