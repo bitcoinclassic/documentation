@@ -102,6 +102,32 @@ Notice that the token ScriptVersion is currently not allowed because we
 don't have any valid value to give it. But if we introduce a new script
 version it would be placed in the outputs segment.
 
+# Script v2
+
+The default value of ScriptVersion is number 2, as opposed to the version 1
+of script that the is in use today.  The version 2 is mostly identical
+to version one, including upgrades made to it over the years and in the
+future. The only exception is that the OP_CHECKSIG is made dramatically
+simpler.  The input-type for OP_CHECKSIG is now no longer configurable, it is
+always '1' and the content that will be signed is the txid.
+
+TODO: does check-multisig need its own mention?
+
+# Block-malleability
+
+The effect of leaving the signatures out of the calculation of the
+transaction-id implies that the signatures are also not used for the
+calculation of the merkle tree.  This means that changes in signatures
+would not be detectable. Except naturally by the fact that missing or
+broken signatures breaks full validation. But it is important to detect
+modifications to such signatures outside of validating all transactions.
+
+For this reason the merkle tree is extended to include (append) the hash of
+the v4 transactions (and those alone) where the hash is taken over a
+data-blob that is build up from:
+
+1. the tx-id
+2. the CMF-tokens 'TxInScript'
 
 # Known limitations
 
