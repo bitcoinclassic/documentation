@@ -19,7 +19,7 @@ can be omitted from individual transactions. Some other ideas are the
 standardization of data-formats (like integer and string encoding) so
 we create a more consistent system.  
 One thing we shall not inherit from XML is its text-based format. Instead
-we use the [Compact Message Format|compactmessageformat.md] (CMF) which is
+we use the [Compact Message Format](compactmessageformat.md) (CMF) which is
 optimized to keep the size small and fast to parse.
 
 # Tokens
