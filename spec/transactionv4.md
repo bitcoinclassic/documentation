@@ -37,7 +37,7 @@ transaction that contains it invalid.
 
 |Name          | id |Format   | Default Value| Description|
 |--------------|----|---------|--------------|------------|
-|TxEnd         |  0 |BoolTrue |  Required    |A marker that is the last byte in the txid calculation|
+|TxEnd         |  0 |BoolTrue |  Required    |A marker that is the end of the transaction|
 |TxInPrevHash  |  1 |ByteArray|  Required    |TxId we are spending|
 |TxPrevIndex   |  2 |Integer  |      0       |Index in prev tx we are spending (applied to previous TxInPrevHash)|
 |TxInScript    |  3 |ByteArray|  Required    |The 'input' part of the script|
@@ -63,8 +63,8 @@ script.
 
 # Serialization order
 
-The tokens defined above have to be serialized in a certain order for the
-transaction to be well-formatted.  Not serializing transactions in the
+The tokens defined above shall be serialized in a certain order for the
+transaction to be valid.  Not serializing transactions in the
 order specified would allow multiple interpretations of the data which
 can't be allowed.
 There is still some flexibility and for that reason it is important for
@@ -90,7 +90,7 @@ Signatures and the TxEnd and hashing that.
 |Segment|Tags|Description|
 |---|---|---|
 |Inputs|TxInPrevHash and TxInPrevIndex|Index can be skipped, but in any input the PrevHash always has to come first|
-|Outputs|TxOutScript|TxOutValue|Order is not relevant|
+|Outputs|TxOutScript & TxOutValue|Order is not relevant|
 |Additional|LockByBlock  LockByTime NOP_1x||
 |Signatures|TxInScript|Exactly the same amount as there are inputs|
 |TxEnd|TxEnd||
@@ -123,8 +123,10 @@ broken signatures breaks full validation. But it is important to detect
 modifications to such signatures outside of validating all transactions.
 
 For this reason the merkle tree is extended to include (append) the hash of
-the v4 transactions (and those alone) where the hash is taken over a
-data-blob that is build up from:
+the v4 transactions. The markle tree will continue to have all the
+transactions' tx-ids but appended to that are the v4 hahes that include the
+signatures as well.  Specifically the hash is taken over a data-blob that
+is build up from:
 
 1. the tx-id
 2. the CMF-tokens 'TxInScript'
