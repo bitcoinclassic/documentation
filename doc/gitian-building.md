@@ -252,7 +252,7 @@ First we need to log in as `root` to set up dependencies and make sure that our
 user can use the sudo command. Type/paste the following in the terminal:
 
 ```bash
-apt-get install git ruby sudo apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring
+apt-get install git ruby sudo apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl
 adduser debian sudo
 ```
 
@@ -304,7 +304,7 @@ Clone the git repositories for bitcoin and Gitian.
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
-git clone https://github.com/bitcoin/bitcoin
+git clone https://github.com/bitcoinclassic/bitcoinclassic bitcoin
 ```
 
 Setting up the Gitian image
@@ -469,5 +469,5 @@ Uploading signatures
 ---------------------
 
 After building and signing you can push your signatures (both the `.assert` and `.assert.sig` files) to the
-[bitcoin/gitian.sigs](https://github.com/bitcoin/gitian.sigs/) repository, or if that's not possible create a pull
-request. You can also mail the files to Wladimir (laanwj@gmail.com) and he will commit them.
+[bitcoin/gitian.sigs](https://github.com/bitcoinclassic/gitian.sigs/) repository, or if that's not possible create a pull
+request. You can also mail the files to Tom (tomz@freedommail.ch) and he will commit them.

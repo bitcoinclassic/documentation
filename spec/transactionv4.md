@@ -32,7 +32,7 @@ a transaction.
 CMF tokens are triplets of name, format (like PositiveInteger) and value.
 Names in this scope are defined much like an enumeration where the actual
 integer value (id, below) is equally important to the written name.
-If any token found that is not covered in the next table will make the
+If any token found that is not covered in the next table it will make the
 transaction that contains it invalid.
 
 |Name          | id |Format   | Default Value| Description|
@@ -41,11 +41,12 @@ transaction that contains it invalid.
 |TxInPrevHash  |  1 |ByteArray|  Required    |TxId we are spending|
 |TxPrevIndex   |  2 |Integer  |      0       |Index in prev tx we are spending (applied to previous TxInPrevHash)|
 |TxInScript    |  3 |ByteArray|  Required    |The 'input' part of the script|
-|TxOutValue    |  4 |Integer  |  Required    |Amount of satoshi to transfer|
+|TxOutValue    |  4 |Integer  |  Required    |Amount of Satoshis to transfer|
 |TxOutScript   |  5 |ByteArray|  Required    |The 'output' part of the script|
 |LockByBlock   |  6 |Integer  |  Optional    |BIP68 replacement|
 |LockByTime    |  7 |Integer  |  Optional    |BIP68 replacement|
-|ScriptVersion |  8 |Integer  |      2       |Defines script version for outputs following|
+|CoinbaseMessage| 8 |ByteArray|  Optional    |A message and some data for a coinbase transaction instead of an input|
+|ScriptVersion |  9 |Integer  |      2       |Defines script version for outputs following|
 |NOP_1x        | 1x |         |  Optional    |Values that will be ignored by anyone parsing the transaction|
 
 # Scripting changes
@@ -89,7 +90,7 @@ Signatures and the TxEnd and hashing that.
 
 |Segment|Tags|Description|
 |---|---|---|
-|Inputs|TxInPrevHash and TxInPrevIndex|Index can be skipped, but in any input the PrevHash always has to come first|
+|Inputs|TxInPrevHash and TxInPrevIndex or CoinbaseMessage|Index can be skipped, but in any input the PrevHash always has to come first. A coinbase is defined to not have any inputs, you can use a CoinbaseMessage instead|
 |Outputs|TxOutScript & TxOutValue|Order is not relevant|
 |Additional|LockByBlock  LockByTime NOP_1x||
 |Signatures|TxInScript|Exactly the same amount as there are inputs|
@@ -102,10 +103,22 @@ Notice that the token ScriptVersion is currently not allowed because we
 don't have any valid value to give it. But if we introduce a new script
 version it would be placed in the outputs segment.
 
+Any transaction has to have inputs, it is a requirement that a transaction
+spends some Bitcoin.  The sole exception to this is the coinbase
+transaction. This is the first transaction of a new block and can not have
+any inputs. To satisfy BIP30 (Duplicate Transactions) we need to have a
+way to store message data inside of the transaction such that it allows
+changing of the transaction-id.
+The CoinbaseMessage token is introduced for this purpose. The rule is that
+a CoinbaseMessage can only be used once in a transaction and the
+transaction can not have any inputs. This means that if a CoinbaseMessage
+token is used the TxInPrevHash, TxInPrevIndex and TxInScript tokens can not
+be used in the same transaction.
+
 # Script v2
 
 The default value of ScriptVersion is number 2, as opposed to the version 1
-of script that the is in use today.  The version 2 is mostly identical
+of script that is in use today.  The version 2 is mostly identical
 to version one, including upgrades made to it over the years and in the
 future. The only exception is that the OP_CHECKSIG is made dramatically
 simpler.  The input-type for OP_CHECKSIG is now no longer configurable, it is
@@ -124,9 +137,9 @@ modifications to such signatures outside of validating all transactions.
 
 For this reason the merkle tree is extended to include (append) the hash of
 the v4 transactions. The markle tree will continue to have all the
-transactions' tx-ids but appended to that are the v4 hahes that include the
+transactions' tx-ids but appended to that are the v4 hashes that include the
 signatures as well.  Specifically the hash is taken over a data-blob that
-is build up from:
+is built up from:
 
 1. the tx-id
 2. the CMF-tokens 'TxInScript'
