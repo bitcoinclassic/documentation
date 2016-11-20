@@ -11,38 +11,23 @@ These can be used to install quickly and easily, making use of the package manag
 
 The Classic project maintains a package repository at https://launchpad.net/~bitcoinclassic/+archive/ubuntu/bitcoinclassic/
 
-Currently, there are only packages for the Long Term Support version 14.4 (trusty).
-
-####Installing on Ubuntu 14.4 LTS
-
 #####Removing other clients / repos
-if you have other Bitcoin repositories or clients installed, you should remove these using the package management features. Otherwise, you may skip this section.
+if you have other Bitcoin repositories or clients installed, you should remove these using the package management features. If you are certain you do not have any other bitcoin installed, you may skip directly ahead to the installation.
 
-You can check whether this is the case by running
+You can check if there is any bitcoin packages installed by running;
 
-    dpkg -l | grep bitcoin
+    dpkg -l bitcoin*
 
-If the output lists a `bitcoin-qt`or `bitcoind`package, you have some other Bitcoin software installed.
+If the output lists a `bitcoin-qt`or `bitcoind`package, you have some other Bitcoin software installed. If either of these are not returned in your listing, you can skip directly ahead to the installation.
 
-You can also check for installed Bitcoin repositories using
+We will now remove the software, this will only remove the conflicting parts. The personal data, like a wallet or the blockchain-data will not be removed.  Before we start, please ensure that your bitcoind or bitcoin-qt application is not running (shut it down cleanly as necessary).  
+Then remove its package by running:
 
-    apt-cache policy | grep bitcoin
+    sudo apt-get remove bitcoin-qt bitcoind
 
-To remove other Bitcoin software, ensure that it is not running (shut it down cleanly as necessary).
+Continue only if the removal of the package(s) was successful!
 
-Then remove its package by running
-
-    sudo apt-get remove bitcoin-qt
-
-or
-
-    sudo apt-get remove bitcoind
-
-depending on whether the graphical client (bitcoin-qt) or the headless client (bitcoind) or both were installed. Continue only if the removal of the package(s) was successful.
-
-As a next step, remove other Bitcoin software repositories, as their packages may conflict with those of Classic.
-
-For example, if you have the Bitcoin Core PPA installed previously, you can remove it as follows:
+As a next step, remove other Bitcoin software repositories, as their packages may conflict with those of Classic. For example, if you have the Bitcoin Core PPA installed previously, you can remove it as follows:
 
     sudo apt-add-repository --remove ppa:bitcoin/bitcoin
 
@@ -65,15 +50,14 @@ If that is successful, you should update the available package information using
 There are two software packages which you can install:
 
 - bitcoin-qt, the graphical client
-- bitcoind, the headless client (usually run as a daemon)
+- bitcoind, the headless client (usually run as a daemon, or service)
 
-You can install either or both of these with 
+You can install either or both of these with:
 
     sudo apt-get install bitcoin-qt
     sudo apt-get install bitcoind
 
 They can also be installed together (although only one of them can be run at a time).
-
 After installation, you should have the respective binary package installed in `/usr/bin/`
 
 ###Installing on generic Linux

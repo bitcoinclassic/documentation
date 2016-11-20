@@ -4,31 +4,6 @@ Setup
 ---------------------
 [Bitcoin Classic](https://bitcoinclassic.com/) is a Bitcoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Bitcoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
-Running
----------------------
-The following are some helpful notes on how to run Bitcoin on your native platform.
-
-### Unix
-
-You need the Qt4 run-time libraries to run Bitcoin-Qt. On Debian or Ubuntu:
-
-	sudo apt-get install libqtgui4
-
-Unpack the files into a directory and run:
-
-- bin/32/bitcoin-qt (GUI, 32-bit) or bin/32/bitcoind (headless, 32-bit)
-- bin/64/bitcoin-qt (GUI, 64-bit) or bin/64/bitcoind (headless, 64-bit)
-
-
-
-### Windows
-
-Unpack the files into a directory, and then run bitcoin-qt.exe.
-
-### OS X
-
-Drag Bitcoin-Core to your applications folder, and then run Bitcoin-Core.
-
 ### Need Help?
 
 * See the documentation at the [Bitcoin Wiki](https://bitcoinfactswiki.github.io/)
