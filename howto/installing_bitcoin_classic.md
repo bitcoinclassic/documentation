@@ -79,19 +79,19 @@ The "Download" link at https://bitcoinclassic.com will take you to the latest re
 The software can be run from any ordinary user's folder. For example:
 
         cd /path/where/you/want/to/unpack
-        tar xf bitcoin-0.x.y-linux64.tar.gz
+        tar xf bitcoin-1.x.y-linux64.tar.gz
 
     In the example above, `x` and `y` indicate software versions.
-    This will create a versioned subfolder, e.g. `bitcoin-0.x`, containing the Classic software.
+    This will create a versioned subfolder, e.g. `bitcoin-1.x`, containing the Classic software.
 
 3. Run the executable from its installation location (if necessary adapting your PATH setting)
 
-        /path/where/you/unpacked/bitcoin-0.x.y/bin/bitcoin-qt
+        /path/where/you/unpacked/bitcoin-1.x.y/bin/bitcoin-qt
 
 The archives contain both the graphical and headless clients. The executables are contained in the `bin` subfolder:
 
-    bitcoin-0.x.y/bin/bitcoind
-    bitcoin-0.x.y/bin/bitcoin-qt
+    bitcoin-1.x.y/bin/bitcoind
+    bitcoin-1.x.y/bin/bitcoin-qt
 
 There are also other binaries such as the command line RPC client, `bitcoin-cli`.
 
@@ -100,8 +100,8 @@ There are also other binaries such as the command line RPC client, `bitcoin-cli`
 Obtain the appropriate installer by following the "Download" link at https://bitcoinclassic.com which will take you to the latest release.  There you will find .exe files for 32- and 64 bit Windows systems.
 They are named e.g.
 
-    bitcoin-0.x.y-win32-setup.exe
-    bitcoin-0.x.y-win64-setup.exe
+    bitcoin-1.x.y-win32-setup.exe
+    bitcoin-1.x.y-win64-setup.exe
 
 where x and y are version numbers.
 
