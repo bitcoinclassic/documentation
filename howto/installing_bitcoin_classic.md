@@ -14,7 +14,7 @@ The Classic project maintains a package repository at https://launchpad.net/~bit
 #####Removing other clients / repos
 if you have other Bitcoin repositories or clients installed, you should remove these using the package management features. If you are certain you do not have any other bitcoin installed, you may skip directly ahead to the installation.
 
-You can check if there is any bitcoin packages installed by running;
+You can check if there is any bitcoin packages installed by running:
 
     dpkg -l bitcoin*
 
