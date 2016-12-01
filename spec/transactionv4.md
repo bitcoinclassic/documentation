@@ -87,15 +87,19 @@ be hashed in order to be signed.
 For transactions with version 4 we calculate a sha256 hash for signing an
 individual input based on the following content;
 
-1) If the hash-type is 0 or 1 we hash the tx-id of the transaction. For other
+1. If the hash-type is 0 or 1 we hash the tx-id of the transaction. For other
   hash types we selectively ignore parts of the transaction exactly like it
   has always worked. With the caveat that we never serialize any signatures.
 
-2) the TxId of the transaction we are spending in this input.
-3) the index of output of the transaction we are spending in this input.
-4) the input script we are signing (without the signature, naturally).
-5) the amount, as a var-int.
-6) the hash-type as a var-int.
+2. the TxId of the transaction we are spending in this input.
+
+3. the index of output of the transaction we are spending in this input.
+
+4. the input script we are signing (without the signature, naturally).
+
+5. the amount, as a var-int.
+
+6. the hash-type as a var-int.
 
 # Serialization order
 
@@ -170,7 +174,7 @@ have the option to reject transactions that use unknown-to-them tokens.
 The amount of tokens that can be added after number 19 is practically
 unlimited and they are currently specified to not be allowed in any
 transaction and the transaction will be rejected if they are present.
-In the future a protocol upgrade may chance that and specify meaning for
+In the future a protocol upgrade may change that and specify meaning for
 any token not yet specified here. Future upgrades should thus be quite a
 lot smoother because there is no change in concepts or in format. Just new
 data.
