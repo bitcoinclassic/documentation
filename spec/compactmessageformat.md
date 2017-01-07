@@ -2,11 +2,11 @@
 
 CMF is a binary format that combines the speed and compact size of binary
 formats and combines it with provably correct markup which became well known
-with formats like XML.  CMF also introduces type-safety to avoid an integer
+with formats like XML.  CMF also introduces type-safety to avoid a number
 being interpreted as a string, or vice-versa.
 
 In CMF we prioritize compact messages over speed and this means that all
-numbers are stored as variable-width integers. Parsing of this is still
+numbers are stored as variable-width numbers. Parsing of this is still
 magnitudes faster than parsing a string representation, so this should not
 be understood to mean that CMF is slow.
 
@@ -90,14 +90,14 @@ encoded in the stream.
 |Format|enum-value|Value-encoding|
 |---|---|---|
 |PositiveNumber|0|Followed by a var-int encoded integer|
-|NegativeInteger|1|The value is multiplied with -1 and then serialized exactly like PositiveNumber|
+|NegativeNumber|1|The value is multiplied with -1 and then serialized exactly like PositiveNumber|
 |String|2|var-int Length (in bytes) first, then UTF8 encoded string|
 |ByteArray|3|var-int Length first, then the actual bytes|
 |BoolTrue|4||
 |BoolFalse|5||
 |Double|6|The little-endian format of a native double in exactly 8 bytes|
 
-# Var-int
+# Variable-width-integer encoding (var-int)
 
 The Var-Int format is a simple variable-byte encoding which Bitcoin has
 used for years. Because there is no stand-alone specification on this
@@ -118,9 +118,9 @@ Examples;
 |0X407F|0XFF 0X7F|
 |0X4080|0X80 0X80 0X00|
 
-# Example details
+# Details for the Example
 
-In the spec there is an example message about a city Cologne that is first
+In the introduction there is an example message about a city Cologne that is first
 described in XML and then encoded into CMF with byte-values listed in the
 table. To help readers understand the format better, here is the step by
 step logic towards the actual byte values that make up our example message.
@@ -139,6 +139,4 @@ Founded is en enum of 4. With the format of Negative number this is binary
 like PositiveNumber. Just without the minus. So the next value is 0x26.
 
 Population is an enum of 5. The PositiveNumber is zero. This is 00101 000
-which is 0x05 The var-int format is described further below. It is the
-simplest form of variable-integer encoding you can find. The var-int
-format is the one Bitcoin has used for years and is explained elsewhere.
+which is 0x05.

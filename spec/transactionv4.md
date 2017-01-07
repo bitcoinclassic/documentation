@@ -14,7 +14,7 @@ The way towards that flexibility is to use a generic concept made popular
 various decades ago with the XML format. The idea is that we give each
 field a name and this means that new fields can be added or optional fields
 can be omitted from individual transactions. Some other ideas are the
-standardization of data-formats (like integer and string encoding) so
+standardization of data-formats (like number and string encoding) so
 we create a more consistent system.  
 One thing we shall not inherit from XML is its text-based format. Instead
 we use the [Compact Message Format](compactmessageformat.md) (CMF) which is
@@ -53,9 +53,9 @@ define how these tokens are named, where they can be placed and which are
 optional.  To refer to XML, this specification would be the schema of
 a transaction.
 
-[CMF](compactmessageformat.md) tokens are triplets of name, format (like PositiveInteger) and value.
+[CMF](compactmessageformat.md) tokens are triplets of name, format (like PositiveNumber) and value.
 Names in this scope are defined much like an enumeration where the actual
-integer value (id, below) is equally important to the written name.
+number value (id, below) is equally important to the written name.
 If any token found that is not covered in the next table it will make the
 transaction that contains it invalid.
 
