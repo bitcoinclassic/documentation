@@ -16,6 +16,10 @@ Check out the source code in the following directory hierarchy.
 	git clone https://github.com/devrandom/gitian-builder.git
 	git clone https://github.com/bitcoinclassic/bitcoinclassic.git bitcoin
 
+Install the necessary dependencies. If you're running Ubuntu 16.04, the following command will work:
+
+	sudo apt-get install git ruby sudo apt-cacher-ng qemu-utils debootstrap python-cheetah parted kpartx bridge-utils make python-vm-builder
+
 ###Bitcoin Classic maintainers/release engineers, update (commit) version in sources
 
 	pushd ./bitcoin
@@ -58,6 +62,12 @@ Check out the source code in the following directory hierarchy.
 
 	pushd ./gitian-builder
 	git pull
+
+  Set up your virtual machine base image: (first time, or when suite changes)
+
+	./bin/make-base-vm --suite trusty --arch amd64
+
+  If you're running `vmbuilder` version 0.12.4, you may have a problem with [this bug](https://bugs.launchpad.net/ubuntu/+source/vm-builder/+bug/1618899) when running the above command. You can use the workaround described in [this comment](https://bugs.launchpad.net/ubuntu/+source/vm-builder/+bug/1618899/comments/2).
 
 ###Fetch and create inputs: (first time, or when dependency versions change)
 
@@ -146,7 +156,7 @@ Commit your signature to gitian.sigs:
 
   Wait for Windows/OS X detached signatures:
 	Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-	Detached signatures will then be committed to the [bitcoin-detached-sigs](https://github.com/bitcoin/bitcoin-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+	Detached signatures will then be committed to the [bitcoinclassic-detached-sigs](https://github.com/bitcoinclassic/bitcoinclassic-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
   Create (and optionally verify) the signed OS X binary:
 
