@@ -61,17 +61,22 @@ transaction that contains it invalid.
 
 |Name               | id |Format   | Default Value| Description|
 |-------------------|----|---------|--------------|------------|
-|TxEnd              |  0 |BoolTrue |   Required   |A marker that is the end of the transaction|
-|TxInPrevHash       |  1 |ByteArray|   Required   |TxId we are spending|
+|TxEnd              |  0 |BoolTrue |              |A marker that is the end of the transaction|
+|TxInPrevHash       |  1 |ByteArray|              |TxId we are spending|
 |TxPrevIndex        |  2 |Integer  |       0      |Index in prev tx we are spending (applied to previous TxInPrevHash)|
 |TxInputStackItem   |  3 |ByteArray|              |A 'push' of the input script|
 |TxInputStackItemContinued|4|ByteArray|           |Another section for the same input|
-|TxOutValue         |  5 |Integer  |   Required   |Amount of Satoshis to transfer|
-|TxOutScript        |  6 |ByteArray|   Required   |The output script|
-|TxRelativeBlockLock|  7 |Integer  |   Optional   |Part of the input stating the amount of blocks (max 0XFFFF) after that input was mined, it can be mined |
-|TxRelativeTimeLock |  8 |Integer  |   Optional   |Part of the input stating the amount of time (max 0XFFFF) after that input was mined, it can be mined. 1 Unit is 512 seconds|
-|CoinbaseMessage    |  9 |ByteArray|   Optional   |A message and some data for a coinbase transaction. Can't be used in combination with any TxIn\* tags |
-|NOP\_1x            | 1x |         |   Optional   |Values that will be ignored by anyone parsing the transaction|
+|TxOutValue         |  5 |Integer  |              |Amount of Satoshis to transfer|
+|TxOutScript        |  6 |ByteArray|              |The output script|
+|TxRelativeBlockLock|  7 |Integer  |              |Part of the input stating the amount of blocks (max 0XFFFF) after that input was mined, it can be mined |
+|TxRelativeTimeLock |  8 |Integer  |              |Part of the input stating the amount of time (max 0XFFFF) after that input was mined, it can be mined. 1 Unit is 512 seconds|
+|CoinbaseMessage    |  9 |ByteArray|              |A message and some data for a coinbase transaction. Can't be used in combination with any TxIn\* tags |
+|NOP\_1x            | 1x |         |              |Values that will be ignored by anyone parsing the transaction|
+
+The TxPrevIndex has a default value of zero. This token can only be used in
+an input and instead of making it required to include it, we set a default
+value so if the input does not have this token, that means the index for
+that input is zero.
 
 # Scripting changes
 
