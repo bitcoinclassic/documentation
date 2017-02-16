@@ -18,7 +18,7 @@ You can check if there is any bitcoin packages installed by running:
 
     dpkg -l bitcoin*
 
-If the output lists a `bitcoin-qt`or `bitcoind`package, you have some other Bitcoin software installed. If neither of these are not returned in your listing, you can skip directly ahead to the installation.
+If the output lists a `bitcoin-qt`or `bitcoind`package, you have some other Bitcoin software installed. If neither of these are returned in your listing, you can skip directly ahead to the installation.
 
 We will now remove the software, this will only remove the conflicting parts. The personal data, like a wallet or the blockchain-data will not be removed.  Before we start, please ensure that your bitcoind or bitcoin-qt application is not running (shut it down cleanly as necessary).  
 Then remove its package by running:
