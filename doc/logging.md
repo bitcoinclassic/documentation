@@ -27,8 +27,7 @@ All this results in the developer seeing much more info than anyone else.
 Operators will likely run a node that has been successfully setup with much less verbose logging.
 They can selectively alter the logs.conf to show sections with higher verbosity. But never debug-level.
 
-The assumption is made that a node operator will not use a released version to debug and develop the actual node software.
-
+The assumption is made that a node operator will not be debugging the actual software, just his own environment and the network as he sees it.
 
 # Log-Levels
 
@@ -36,41 +35,40 @@ Software developers have to choose the log level for every message they log. To 
 
 Remember, a user selecting to see, for instance, Warning level will see all messages of higher severity as well.
 
-* Debug
+* Debug  
 Not present in the release binary at all.
-As such purely for debugging purposes. Is allowed to be extra verbose.
-This is exclusively for the software developer. Node operators never see this.
-* Warning
+As such purely for developers. Is allowed to be extra verbose. Node operators never see this.
+* Warning  
 This is used when something minor went wrong.
 This is the lowest level that is shipped in the 'release' executable.
-* Info
+* Info  
 Both Warning and Info are the log levels a node operator will use to find out what is going on and why is something going wrong.
-* Critical
+* Critical  
 This level should be seen as the default level a node can operate on, for people that don't really care
 how it works, just that it does its work.
-Users logging in and not getting a connection is going to this level, the network having issues as well.
+Users logging in and not getting a connection is reported at this level. Same with the network having issues.  
 This is the level of the car-dashboard. The 'handbrake on' light goes here, miles driven goes here as well.
-* Fatal
-Practically speaking this is limited to startup and shutdown messages, especially when the shutdown was due to an error.
+* Fatal  
+Practically speaking this is limited to startup and shutdown messages, especially when the shutdown was due to an problem.
 
 
 # Log-Sections
 
-Each log line is part of a 'section'. Sections are numbered and we separate functionality by sections. For instance we have a 'Net' section for the p2p part of Bitcoin. We have a 'Validation', a 'mempool' one etc.
-
-The idea is that a developer or node operator can selectively turn on sections. For instance, we realise we consistently ban a node shortly after connecting to it. That means we can show more log-levels of the 'net' section to allow troubleshooting.
+Each log line is part of a 'section'. Sections are numbered and we separate functionality by sections. For instance we have a `Net` section for the p2p part of Bitcoin. We have a `Validation`, a `Mempool` one etc.
 
 The log-levels an operator wants to see in the output are configurable per section. You can set one to quiet and another to debug level.
 
-Guidance for developers in choosing the sections for logging;
+The idea is that a we can selectively turn on sections. For instance, we realise we consistently ban a node shortly after connecting to it. That means we can show more log-levels of the `Net` section to allow troubleshooting.
 
-* The 'Global' section is exclusively for developers. (0-999)
+Guidance for developers in choosing the sections when writing code that does logging;
+
+* The 'Global' section is exclusively for developers. (0-999)  
 This is a bit messy as much of the old code still uses this, but the goal is to move them all to their respective sections.
 Practically speaking this means we should not have a single warning/info or higher severity log-level in the code using any section under 1000.
 
-* We have 'major' sections. "Validation", "Networking" , "Wallet" etc. Developers that assign a new section for their new code should do so in the appropriate major section.  
+* We have 'major' sections. `Validation`, `Networking` , `Wallet` etc. Developers that assign a new section for their new code should do so in the appropriate major section.  
 Not all sections need names, a number is perfectly fine. But please do register it somewhere so we avoid reuse.
 
-* Do not pick sections over 20999, we do not initialise them and their behaviour is undefined.
+* Do not pick sections numbered over 20999, we do not initialise them and their behaviour is undefined (20k sections should really be enough anyway).
 
 * Log sections are currently documented only in the Logger.h, we need proper documentation either in the documentation repo or on the website (or both).
