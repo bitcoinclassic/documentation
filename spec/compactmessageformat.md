@@ -118,6 +118,13 @@ Examples;
 |0X407F|0XFF 0X7F|
 |0X4080|0X80 0X80 0X00|
 
+# Repeated names
+
+Arrays or lists are serialized using repeated names.
+Using the same name for subsequent tokens results in a list which is terminated by a token name change.
+This specification allows the creation of mixed format lists;
+lists containing both positive and negative numbers or even containing strings, booleans and doubles.
+
 # Details for the Example
 
 In the introduction there is an example message about a city Cologne that is first
